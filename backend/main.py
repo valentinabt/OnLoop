@@ -32,6 +32,12 @@ def login():
 def callback(code: str = None, error: str = None):
     if error:
         return RedirectResponse("http://127.0.0.1:5500/index.html")
+   
+    access_token = get_token(code)
+    return RedirectResponse(f"http://127.0.0.1:5500/index.html?access_token={access_token}", status_code=302)
+
+
+def get_token(code: str):
     response = requests.post(
         "https://accounts.spotify.com/api/token",
         data={
@@ -42,11 +48,23 @@ def callback(code: str = None, error: str = None):
         auth=(CLIENT_ID, CLIENT_SECRET),
     )
     tokens = response.json()
-    access_token = tokens["access_token"]
-    return RedirectResponse(f"http://127.0.0.1:5500/index.html?access_token={access_token}", status_code=302)
+    return tokens["access_token"]
 
 @app.get("/top-artists")
 def top_artists(access_token: str):
+ 
+    data = get_artists(access_token)
+    
+    artists = []
+    for artist in data["items"]:
+        artists.append({
+            "name": artist["name"],
+            "image": artist["images"][0]["url"],
+        })
+    
+    return artists
+
+def get_artists(access_token: str):
     response = requests.get(
         "https://api.spotify.com/v1/me/top/artists",
         params={
@@ -57,14 +75,6 @@ def top_artists(access_token: str):
             "Authorization": f"Bearer {access_token}"
         }
     )
-    print(response.status_code, response.text)
-    data = response.json()
+   
     
-    artists = []
-    for artist in data["items"]:
-        artists.append({
-            "name": artist["name"],
-            "image": artist["images"][0]["url"],
-        })
-    
-    return artists
+    return response.json()
