@@ -1,15 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 import requests
-import os
-from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
-
-load_dotenv()
-
-CLIENT_ID = os.getenv("CLIENT_ID")
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")
-REDIRECT_URI = os.getenv("REDIRECT_URI")
+from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 
 app = FastAPI()
 
