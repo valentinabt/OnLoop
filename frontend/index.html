@@ -52,32 +52,34 @@
 
     <script>
         function login() {
-            window.location.href = "http://127.0.0.1:8000/login";
-        }
+    window.location.href = "http://127.0.0.1:8000/login";
+}
 
-        async function loadArtists(token) {
-            const response = await fetch(`http://127.0.0.1:8000/top-artists?access_token=${token}`);
-            const artists = await response.json();
+async function loadArtists() {
+    const response = await fetch("http://127.0.0.1:8000/top-artists", {
+        credentials: "include"
+    });
+    const data = await response.json();
+    if (data.error) {
+    document.getElementById("login-btn").style.display = "block";
+    return;
+}
 
-            const container = document.getElementById("artists");
-            container.innerHTML = "";
+    const container = document.getElementById("artists");
+    container.innerHTML = "";
 
-            artists.forEach(artist => {
-    container.innerHTML += `
-        <div class="artist-card">
-            <img src="${artist.image || 'https://via.placeholder.com/150'}" alt="${artist.name}">
-            <h3>${artist.name}</h3>
-        </div>
-    `;
-});
-        }
+    data.forEach(artist => {
+        container.innerHTML += `
+            <div class="artist-card">
+                <img src="${artist.image || 'https://via.placeholder.com/150'}" alt="${artist.name}">
+                <h3>${artist.name}</h3>
+            </div>
+        `;
+    });
+}
 
-        const params = new URLSearchParams(window.location.search);
-        const token = params.get("access_token");
-        if (token) {
-            document.getElementById("login-btn").style.display = "none";
-            loadArtists(token);
-        }
+    loadArtists();
+    
     </script>
 </body>
 </html>

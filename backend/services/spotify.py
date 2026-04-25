@@ -1,5 +1,9 @@
 import requests
+import redis
+import uuid
 from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
+
+r = redis.Redis(host='localhost', port=6379, db=0)
 
 def get_token(code: str):
     response = requests.post(
@@ -37,3 +41,14 @@ def get_artists(access_token: str):
         })
     
     return artists
+
+def create_session(access_token: str):
+    session_id = str(uuid.uuid4())  #crea un id
+    r.setex(session_id, 3600, access_token) #asocia el id con el token y pone qpara que se expire en 1 hora
+    return session_id
+
+def get_token_from_session(session_id: str):
+    token = r.get(session_id)
+    if not token:
+        return None
+    return token.decode("utf-8")

@@ -1,18 +1,18 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, Cookie
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI
-from backend.services.spotify import get_token, get_artists
-
+from backend.services.spotify import get_token, get_artists, create_session, get_token_from_session
 
 app = FastAPI()
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://127.0.0.1:5500"],
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 @app.get("/login")
@@ -35,11 +35,24 @@ def callback(code: str = None, error: str = None):
         return RedirectResponse("http://127.0.0.1:5500/index.html")
    
     access_token = get_token(code)
-    return RedirectResponse(f"http://127.0.0.1:5500/index.html?access_token={access_token}", status_code=302)
+    session_id = create_session(access_token)
+    redirect = RedirectResponse("http://127.0.0.1:5500/index.html", status_code=302)
+    redirect.set_cookie(
+        key="session_id",
+        value=session_id,
+        httponly=True,
+        samesite="lax",   #agrego la cookie. Cuando se redirija se va a guardar en el navegador
+        secure= False,
+        
+    )
+    return redirect
 
-
-@app.get("/top-artists")
-def top_artists(access_token: str):
- 
-   return get_artists(access_token)
     
+@app.get("/top-artists")
+def top_artists(session_id: str = Cookie(default=None)):  #busca la cookie llamada session_id. Si no hay, no pone nada
+    if not session_id:
+        return {"error": "no hay sesión activa"}  
+    access_token = get_token_from_session(session_id)
+    if not access_token:
+        return {"error": "sesión expirada, volvé a loguearte"}
+    return get_artists(access_token)
