@@ -8,46 +8,69 @@
         position: relative;
         background-color: #121212;
         color: white;
-        font-family: Arial, sans-serif;
+        font-family: Helvetica;
         text-align: center;
         padding: 20px;
+        margin: 0;
+        min-height: 100vh;
+        box-sizing: border-box;
     }
-    h1 { color: #1bb551; }
+    h1 { color: #1ED160; }
+    #titulo-login {
+        font-size: 70px;
+    }
+
+    #titulo-top {
+        font-size: 40px;
+    }
+    .centered {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-spotify {
+        background-color: #1ed760;
+        color: black;
+        border: none;
+        padding: 16px 80px;
+        border-radius: 50px;
+        font-size: 16px;
+        cursor: pointer;
+        font-family: Helvetica;
+        font-weight: bold;
+    }
+
+    .btn-spotify:hover { background-color: #1ED160; }
     #login-btn {
-        background-color: #1DB954;
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
+        margin-top: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
-    #login-btn:hover { background-color: #17a349; }
     #logout-btn {
-        background-color: #1DB954;
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
         position: absolute;
         top: 20px;
         right: 20px;
+        padding: 10px 30px;
+        font-size: 14px;
     }
-    #logout-btn:hover { background-color: #17a349; }
     #artists {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(5, 160px);
         gap: 20px;
-        margin-top: 30px;
+        margin-top: 60px;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
     }
     .artist-card {
-        background-color: #282828;
+        background-color: #121212;
         border-radius: 10px;
         padding: 15px;
-        width: 150px;
+        width: 160px;
     }
     .artist-card img {
         width: 150px;
@@ -56,50 +79,24 @@
         object-fit: cover;
     }
     .artist-card h3 { font-size: 14px; margin: 10px 0 5px; }
-    .artist-card p { font-size: 12px; color: #aaa; margin: 0; }
+    .artist-card p { font-size: 12px; color: #FFFFFF; margin: 0; }
+    #contenido {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>
 </head>
-<body>
-    <h1>Tus artistas más escuchados </h1>
-    <button id="login-btn" onclick="login()" style="display:none">Conectar con Spotify</button>
-    <button id="logout-btn" onclick="logout()" style="display:none; position:absolute; top:20px; right:20px;">Cerrar sesión</button>
-    <div id="artists"></div>
+<body class="centered">
+     <div id="contenido">
+        <h1 id="titulo-login">Tus artistas más escuchados</h1>
+        <h1 id="titulo-top" style="display:none">Tus artistas más escuchados</h1>
+        <div id="artists"></div>
+    </div>
+     <button id="login-btn" class="btn-spotify" onclick="login()" style="display:none">Conectar con Spotify</button>
+     <button id="logout-btn" class="btn-spotify" onclick="logout()" style="display:none">Cerrar sesión</button>
 
-    <script>
-        function login() {
-    window.location.href = "http://127.0.0.1:8000/login";
-}
-        function logout() {
-    window.location.href = "http://127.0.0.1:8000/logout";
-}
-
-async function loadArtists() {
-    const response = await fetch("http://127.0.0.1:8000/top-artists", {
-        credentials: "include"
-    });
-    const data = await response.json();
-    if (data.error) {
-    document.getElementById("login-btn").style.display = "block";
-    return;
-}
-
-    const container = document.getElementById("artists");
-    container.innerHTML = "";
-
-    data.forEach(artist => {
-        container.innerHTML += `
-            <div class="artist-card">
-                <img src="${artist.image || 'https://via.placeholder.com/150'}" alt="${artist.name}">
-                <h3>${artist.name}</h3>
-            </div>
-        `;
-    });
-    document.getElementById("logout-btn").style.display = "block";
-}
-
-    loadArtists();
     
-    
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
