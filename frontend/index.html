@@ -2,101 +2,21 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Tus artistas más escuchados</title>
-   <style>
-    body {
-        position: relative;
-        background-color: #121212;
-        color: white;
-        font-family: Helvetica;
-        text-align: center;
-        padding: 20px;
-        margin: 0;
-        min-height: 100vh;
-        box-sizing: border-box;
-    }
-    h1 { color: #1ED160; }
-    #titulo-login {
-        font-size: 70px;
-    }
-
-    #titulo-top {
-        font-size: 40px;
-    }
-    .centered {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .btn-spotify {
-        background-color: #1ed760;
-        color: black;
-        border: none;
-        padding: 16px 80px;
-        border-radius: 50px;
-        font-size: 16px;
-        cursor: pointer;
-        font-family: Helvetica;
-        font-weight: bold;
-    }
-
-    .btn-spotify:hover { background-color: #1ED160; }
-    #login-btn {
-        margin-top: 40px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #logout-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 10px 30px;
-        font-size: 14px;
-    }
-    #artists {
-        display: grid;
-        grid-template-columns: repeat(5, 160px);
-        gap: 20px;
-        margin-top: 60px;
-        margin-left: auto;
-        margin-right: auto;
-        width: fit-content;
-    }
-    .artist-card {
-        background-color: #121212;
-        border-radius: 10px;
-        padding: 15px;
-        width: 160px;
-    }
-    .artist-card img {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-    .artist-card h3 { font-size: 14px; margin: 10px 0 5px; }
-    .artist-card p { font-size: 12px; color: #FFFFFF; margin: 0; }
-    #contenido {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-</style>
+    <title>Toptify</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="centered">
-     <div id="contenido">
+    <section id="home">
         <h1 id="titulo-login">Tus artistas más escuchados</h1>
-        <h1 id="titulo-top" style="display:none">Tus artistas más escuchados</h1>
-        <div id="artists"></div>
-    </div>
-     <button id="login-btn" class="btn-spotify" onclick="login()" style="display:none">Conectar con Spotify</button>
-     <button id="logout-btn" class="btn-spotify" onclick="logout()" style="display:none">Cerrar sesión</button>
+        <button id="login-btn" class="btn-spotify" onclick="login()">Conectar con Spotify</button>
+    </section>
 
-    
+    <section id="top" style="display:none">
+        <h1 id="titulo-top">Tus artistas más escuchados</h1>
+        <div id="artists"></div>
+        <button id="logout-btn" class="btn-spotify" onclick="logout()">Cerrar sesión</button>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>

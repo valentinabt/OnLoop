@@ -1,7 +1,8 @@
-    function login() {
+function login() {
     window.location.href = "http://127.0.0.1:8000/login";
 }
-        function logout() {
+
+function logout() {
     window.location.href = "http://127.0.0.1:8000/logout";
 }
 
@@ -10,12 +11,12 @@ async function loadArtists() {
         credentials: "include"
     });
     const data = await response.json();
+
     if (data.error) {
-    document.getElementById("login-btn").style.display = "block";
-    document.getElementById("titulo-login").style.display = "block";
-    document.getElementById("titulo-top").style.display = "none";
-    return;
-}
+        document.getElementById("home").style.display = "flex";
+        document.getElementById("top").style.display = "none";
+        return;
+    }
 
     const container = document.getElementById("artists");
     container.innerHTML = "";
@@ -28,11 +29,10 @@ async function loadArtists() {
             </div>
         `;
     });
-    document.getElementById("titulo-login").style.display = "none";
-    document.getElementById("titulo-top").style.display = "block";
-    document.getElementById("titulo-top").style.fontSize = "40px";
-    document.getElementById("logout-btn").style.display = "block";
-   
+
+    document.getElementById("home").style.display = "none";
+    document.getElementById("top").style.display = "flex";
+    document.title = "Tu top 10 - Toptify";
 }
 
-    loadArtists();
+loadArtists();
