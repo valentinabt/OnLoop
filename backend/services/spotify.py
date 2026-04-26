@@ -52,3 +52,7 @@ def get_token_from_session(session_id: str):
     if not token:
         return None
     return token.decode("utf-8")
+
+def delete_session(session_id: str):
+    r.delete(session_id)
+    return None

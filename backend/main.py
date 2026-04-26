@@ -2,7 +2,7 @@ from fastapi import FastAPI, Response, Cookie
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI
-from backend.services.spotify import get_token, get_artists, create_session, get_token_from_session
+from backend.services.spotify import get_token, get_artists, create_session, get_token_from_session, delete_session
 
 app = FastAPI()
 
@@ -56,3 +56,14 @@ def top_artists(session_id: str = Cookie(default=None)):  #busca la cookie llama
     if not access_token:
         return {"error": "sesión expirada, volvé a loguearte"}
     return get_artists(access_token)
+
+@app.get("/logout")
+
+def logout(session_id: str = Cookie(default=None)):
+    if not session_id:
+        return {"error": "no hay sesión activa"}
+    delete_session(session_id)
+    redirect = RedirectResponse("http://127.0.0.1:5500/index.html", status_code=302)
+    redirect.delete_cookie(key="session_id")
+    return redirect
+
