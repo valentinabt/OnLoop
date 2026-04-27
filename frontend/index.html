@@ -13,9 +13,11 @@
 
     <section id="top" style="display:none">
         <h1 id="titulo-top">Tus artistas más escuchados</h1>
-        <button class="btn-spotify" onclick="update_range('short_term')">Último mes</button>
-        <button class="btn-spotify" onclick="update_range('medium_term')">Últimos seis meses</button>
-        <button class="btn-spotify" onclick="update_range('long_term')">Último año</button>
+        <div class="range-bar">
+            <button class="range-btn active" onclick="update_range('short_term',this)">Último mes</button>
+            <button class="range-btn" onclick="update_range('medium_term',this)">Últimos seis meses</button>
+            <button class="range-btn" onclick="update_range('long_term',this)">Último año</button>
+        </div>
         <div id="artists"></div>
         <button id="logout-btn" class="btn-spotify" onclick="logout()">Cerrar sesión</button>
     </section>

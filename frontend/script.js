@@ -7,8 +7,14 @@ function logout() {
 }
 let current_range = "short_term";
 
-async function update_range(range){
+async function update_range(range,btn_element){
     current_range = range;
+    
+    const buttons = document.querySelectorAll('.range-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    if(btn_element) {
+        btn_element.classList.add('active');
+    }
     loadArtists(current_range);
 }
 
