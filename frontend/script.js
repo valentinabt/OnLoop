@@ -50,5 +50,4 @@ async function loadArtists(range) {
 }
 
 
-
 loadArtists(current_range);
