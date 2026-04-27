@@ -1,13 +1,17 @@
 import requests
 import redis
 import uuid
-from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
+from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REDIS_HOST, REDIS_PORT
 
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0)
+
+SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+
+SPOTIFY_TOP_URL = "https://api.spotify.com/v1/me/top/artists"
 
 def get_token(code: str):
     response = requests.post(
-        "https://accounts.spotify.com/api/token",
+        SPOTIFY_TOKEN_URL,
         data={
             "grant_type": "authorization_code",
             "code": code,
@@ -21,7 +25,7 @@ def get_token(code: str):
 
 def get_artists(access_token: str):
     response = requests.get(
-        "https://api.spotify.com/v1/me/top/artists",
+        SPOTIFY_TOP_URL,
         params={
             "time_range": "short_term",
             "limit": 10
@@ -43,8 +47,8 @@ def get_artists(access_token: str):
     return artists
 
 def create_session(access_token: str):
-    session_id = str(uuid.uuid4())  #crea un id
-    r.setex(session_id, 3600, access_token) #asocia el id con el token y pone qpara que se expire en 1 hora
+    session_id = str(uuid.uuid4())  
+    r.setex(session_id, 3600, access_token) 
     return session_id
 
 def get_token_from_session(session_id: str):
@@ -55,4 +59,4 @@ def get_token_from_session(session_id: str):
 
 def delete_session(session_id: str):
     r.delete(session_id)
-    return None
+    
