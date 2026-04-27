@@ -41,7 +41,7 @@ def callback(code: str = None, error: str = None):
         key="session_id",
         value=session_id,
         httponly=True,
-        samesite="lax",   #agrego la cookie. Cuando se redirija se va a guardar en el navegador
+        samesite="lax",   
         secure= False,
         
     )

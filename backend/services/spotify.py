@@ -24,7 +24,6 @@ def get_token(code: str):
 
 
 def get_artists(access_token: str, time_range: str):
-    print(f"DEBUG: Pidiendo a Spotify con range: {time_range}")
     response = requests.get(
         SPOTIFY_TOP_URL,
         params={
