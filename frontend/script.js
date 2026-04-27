@@ -5,9 +5,15 @@ function login() {
 function logout() {
     window.location.href = "http://127.0.0.1:8000/logout";
 }
+let current_range = "short_term";
 
-async function loadArtists() {
-    const response = await fetch("http://127.0.0.1:8000/top-artists", {
+async function update_range(range){
+    current_range = range;
+    loadArtists(current_range);
+}
+
+async function loadArtists(range) {
+    const response = await fetch(`http://127.0.0.1:8000/top-artists?time_range=${range}`, {
         credentials: "include"
     });
     const data = await response.json();
@@ -33,6 +39,10 @@ async function loadArtists() {
     document.getElementById("home").style.display = "none";
     document.getElementById("top").style.display = "flex";
     document.title = "Tu top 10 - Toptify";
+
+
 }
 
-loadArtists();
+
+
+loadArtists(current_range);

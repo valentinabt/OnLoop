@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Cookie
+from fastapi import FastAPI, Cookie, Query
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
@@ -49,13 +49,13 @@ def callback(code: str = None, error: str = None):
 
     
 @app.get("/top-artists")
-def top_artists(session_id: str = Cookie(default=None)): 
+def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(default="short_term")): 
     if not session_id:
         return {"error": "no hay sesión activa"}  
     access_token = get_token_from_session(session_id)
     if not access_token:
         return {"error": "sesión expirada, volvé a loguearte"}
-    return get_artists(access_token)
+    return get_artists(access_token, time_range)
 
 @app.get("/logout")
 def logout(session_id: str = Cookie(default=None)):
