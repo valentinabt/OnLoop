@@ -43,14 +43,19 @@ h1 { color: #1ED160; }
     padding: 10px 30px;
     font-size: 14px;
 }
+#top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    place-items: center;
+    width: 100%;
+}
 #artists {
     display: grid;
-    grid-template-columns: repeat(5, 160px);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin-top: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
 }
 .artist-card {
     background-color: #121212;
@@ -65,11 +70,7 @@ h1 { color: #1ED160; }
     object-fit: cover;
 }
 .artist-card h3 { font-size: 14px; margin: 10px 0 5px; }
-#top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 #home {
     display: flex;
     flex-direction: column;
