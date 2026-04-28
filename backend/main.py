@@ -3,9 +3,17 @@ from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
 from backend.services.spotify import get_token, get_artists, create_session, get_token_from_session, delete_session
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 
 app = FastAPI()
 
+
+app.mount("/static", StaticFiles(directory="/app/frontend"), name="static")
+@app.get("/")
+def root():
+   return FileResponse("/app/frontend/index.html")
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,11 +40,11 @@ def login():
 @app.get("/callback")
 def callback(code: str = None, error: str = None):
     if error:
-        return RedirectResponse(f"{FRONTEND_URL}/index.html")
+        return RedirectResponse(f"{FRONTEND_URL}")
    
     access_token = get_token(code)
     session_id = create_session(access_token)
-    redirect = RedirectResponse(f"{FRONTEND_URL}/index.html", status_code=302)
+    redirect = RedirectResponse(f"{FRONTEND_URL}", status_code=302)
     redirect.set_cookie(
         key="session_id",
         value=session_id,
@@ -62,7 +70,7 @@ def logout(session_id: str = Cookie(default=None)):
     if not session_id:
         return {"error": "no hay sesión activa"}
     delete_session(session_id)
-    redirect = RedirectResponse(f"{FRONTEND_URL}/index.html", status_code=302)
+    redirect = RedirectResponse(f"{FRONTEND_URL}", status_code=302)
     redirect.delete_cookie(key="session_id")
     return redirect
 

@@ -7,3 +7,4 @@ pydantic==2.10.6
 starlette==0.44.0
 anyio==4.5.2
 h11==0.16.0
+python-multipart
