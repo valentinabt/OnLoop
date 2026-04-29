@@ -5,6 +5,7 @@ from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
 from backend.services.spotify import get_token, get_artists, create_session, get_token_from_session, delete_session
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+import uuid
 
 
 app = FastAPI()
@@ -27,23 +28,38 @@ app.add_middleware(
 
 def login():
     scope = "user-top-read%20user-read-private"
-    url = (
+    state = str(uuid.uuid4())  
+    redirect = RedirectResponse(
         "https://accounts.spotify.com/authorize"
         f"?client_id={CLIENT_ID}"
         f"&response_type=code"
         f"&redirect_uri={REDIRECT_URI}"
+        f"&state={state}"
         f"&scope={scope}"
         f"&show_dialog=true"
     )
-    return RedirectResponse(url)
+    
+    redirect.set_cookie(
+        key="oauth_state",
+        value=state,
+        httponly=True,
+        samesite="lax",   
+        secure=True,
+        
+    )
+    return redirect
 
 @app.get("/callback")
-def callback(code: str = None, error: str = None):
+def callback(code: str = None, error: str = None,state: str = None, state_cookie: str = Cookie(default=None)):
     if error:
         return RedirectResponse(f"{FRONTEND_URL}")
    
     elif not code:
         return RedirectResponse(f"{FRONTEND_URL}")
+    
+    elif not state or state != state_cookie:
+        return RedirectResponse(f"{FRONTEND_URL}")
+    
     
     access_token = get_token(code)
     session_id = create_session(access_token)
