@@ -1,9 +1,9 @@
 function login() {
-    window.location.href = "http://127.0.0.1:8000/login";
+    window.location.href = "/login";
 }
 
 function logout() {
-    window.location.href = "http://127.0.0.1:8000/logout";
+    window.location.href = "/logout";
 }
 let current_range = "short_term";
 
@@ -19,7 +19,7 @@ async function update_range(range,btn_element){
 }
 
 async function loadArtists(range) {
-    const response = await fetch(`http://127.0.0.1:8000/top-artists?time_range=${range}`, {
+    const response = await fetch(`/top-artists?time_range=${range}`, {
         credentials: "include"
     });
     const data = await response.json();
