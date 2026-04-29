@@ -18,7 +18,7 @@ def root():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[FRONTEND_URL],
-    allow_methods=["*"],
+    allow_methods=["GET","POST"],
     allow_headers=["*"],
     allow_credentials=True,
 )
@@ -42,6 +42,9 @@ def callback(code: str = None, error: str = None):
     if error:
         return RedirectResponse(f"{FRONTEND_URL}")
    
+    elif not code:
+        return RedirectResponse(f"{FRONTEND_URL}")
+    
     access_token = get_token(code)
     session_id = create_session(access_token)
     redirect = RedirectResponse(f"{FRONTEND_URL}", status_code=302)
@@ -50,7 +53,7 @@ def callback(code: str = None, error: str = None):
         value=session_id,
         httponly=True,
         samesite="lax",   
-        secure= False,
+        secure=True,
         
     )
     return redirect
