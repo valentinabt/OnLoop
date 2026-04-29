@@ -52,7 +52,7 @@ def login():
 @app.get("/callback")
 def callback(code: str = None, error: str = None,state: str = None, state_cookie: str = Cookie(default=None)):
     print("STATE FROM SPOTIFY:", state)
-    print("STATE COOKIE:", oauth_state)
+    print("STATE COOKIE:", state_cookie)
     if error:
         return RedirectResponse(f"{FRONTEND_URL}")
    
