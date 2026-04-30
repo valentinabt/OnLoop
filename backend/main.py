@@ -79,16 +79,16 @@ def callback(code: str = None, error: str = None,state: str = None, oauth_state:
 @app.get("/top-artists")
 def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(default="short_term")): 
     if not session_id:
-        return {"error": "no hay sesión activa"}  
+        return {"error": "NO_ACTIVE_SESSION"}  
     access_token = get_token_from_session(session_id)
     if not access_token:
-        return {"error": "sesión expirada, volvé a loguearte"}
+        return {"error": "NO_ACTIVE_SESSION"}
     return get_artists(access_token, time_range)
 
 @app.get("/logout")
 def logout(session_id: str = Cookie(default=None)):
     if not session_id:
-        return {"error": "no hay sesión activa"}
+        return {"error": "NO_ACTIVE_SESSION"}
     delete_session(session_id)
     redirect = RedirectResponse(f"{FRONTEND_URL}", status_code=302)
     redirect.delete_cookie(key="session_id")

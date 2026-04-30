@@ -27,6 +27,10 @@ async function loadArtists(range) {
     if (data.error) {
         document.getElementById("home").style.display = "flex";
         document.getElementById("top").style.display = "none";
+        if(error == "NO_ACTIVE_SESSION"){
+            showToast("Por favor, vuelva a iniciar sesión");
+            
+        }
         return;
     }
 
