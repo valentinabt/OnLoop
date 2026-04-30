@@ -34,12 +34,18 @@ async function loadArtists(range) {
     container.innerHTML = "";
 
     data.forEach(artist => {
-        container.innerHTML += `
-            <div class="artist-card">
-                <img src="${artist.image || 'https://via.placeholder.com/150'}" alt="${artist.name}">
-                <h3>${artist.name}</h3>
-            </div>
-        `;
+        const card = document.createElement("div");
+        card.className("artist-card");
+        const image = document.createElement("img");
+        image.src = artist.image || "https://via.placeholder.com/150";
+        image.alt = artist.name;
+        const name = document.createElement("h3");
+        name.textContent = artist.name;
+        card.appendChild(image);
+        card.appendChild(name);
+        container.appendChild(card);
+
+
     });
 
     document.getElementById("home").style.display = "none";
