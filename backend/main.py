@@ -50,16 +50,15 @@ def login():
     return redirect
 
 @app.get("/callback")
-def callback(code: str = None, error: str = None,state: str = None, state_cookie: str = Cookie(default=None)):
-    print("STATE FROM SPOTIFY:", state)
-    print("STATE COOKIE:", state_cookie)
+def callback(code: str = None, error: str = None,state: str = None, oauth_state: str = Cookie(default=None)):
+    
     if error:
         return RedirectResponse(f"{FRONTEND_URL}")
    
     elif not code:
         return RedirectResponse(f"{FRONTEND_URL}")
     
-    elif not state or state != state_cookie:
+    elif not state or state != oauth_state:
         return RedirectResponse(f"{FRONTEND_URL}")
     
     
