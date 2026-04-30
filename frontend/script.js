@@ -39,7 +39,7 @@ async function loadArtists(range) {
 
     data.forEach(artist => {
         const card = document.createElement("div");
-        card.className("artist-card");
+        card.className = "artist-card";
         const image = document.createElement("img");
         image.src = artist.image || "https://via.placeholder.com/150";
         image.alt = artist.name;
