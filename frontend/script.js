@@ -25,7 +25,6 @@ async function loadArtists(range) {
     const data = await response.json();
 
     if (data.error) {
-        print("HUBO_ERROR");
         document.getElementById("home").style.display = "flex";
         document.getElementById("top").style.display = "none";
         if(error == "NO_ACTIVE_SESSION"){
@@ -34,7 +33,6 @@ async function loadArtists(range) {
         }
         return;
     }
-    print("TODO_BIEN");
     const container = document.getElementById("artists");
     container.innerHTML = "";
    
