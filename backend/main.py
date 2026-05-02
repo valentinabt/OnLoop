@@ -14,7 +14,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="/app/frontend"), name="static")
 @app.get("/")
 def root():
-   return FileResponse("/app/frontend/index.html")
+   return FileResponse("/app/frontend/login.html")
 
 app.add_middleware(
     CORSMiddleware,
@@ -64,7 +64,7 @@ def callback(code: str = None, error: str = None,state: str = None, oauth_state:
     
     access_token = get_token(code)
     session_id = create_session(access_token)
-    redirect = RedirectResponse(f"{FRONTEND_URL}/top-artists.html", status_code=302)
+    redirect = RedirectResponse(f"{FRONTEND_URL}/static/top-artists.html", status_code=302)
     redirect.set_cookie(
         key="session_id",
         value=session_id,
