@@ -64,7 +64,7 @@ def callback(code: str = None, error: str = None,state: str = None, oauth_state:
     
     access_token = get_token(code)
     session_id = create_session(access_token)
-    redirect = RedirectResponse(f"{FRONTEND_URL}/static/top-artists.html", status_code=302)
+    redirect = RedirectResponse(f"{FRONTEND_URL}/top-artists", status_code=302)
     redirect.set_cookie(
         key="session_id",
         value=session_id,
@@ -85,10 +85,14 @@ def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(
         return {"error": "NO_ACTIVE_SESSION"}
     return get_artists(access_token, time_range)
 
+@app.get("/top-artists")
+def top_artists_page():
+    return FileResponse("/app/frontend/top-artists.html")
+
 @app.get("/logout")
 def logout(session_id: str = Cookie(default=None)):
     if not session_id:
-        return {"error": "NO_ACTIVE_SESSION"}
+        return RedirectResponse(f"{FRONTEND_URL}")
     delete_session(session_id)
     redirect = RedirectResponse(f"{FRONTEND_URL}", status_code=302)
     redirect.delete_cookie(key="session_id")
