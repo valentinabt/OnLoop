@@ -22,11 +22,12 @@ async function loadArtists(range) {
 
     if (data.error) {
         
-        if(error == "NO_ACTIVE_SESSION"){
+        if(data.error == "NO_ACTIVE_SESSION"){
             window.location.href = "/login?r=session_expired";
             
         }
         window.location.href = "/login?r=error";
+        return;
     }
     const container = document.getElementById("artists");
     container.innerHTML = "";
