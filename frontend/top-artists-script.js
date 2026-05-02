@@ -1,7 +1,3 @@
-function login() {
-    window.location.href = "/login";
-}
-
 function logout() {
     window.location.href = "/logout";
 }
@@ -19,19 +15,18 @@ async function update_range(range,btn_element){
 }
 
 async function loadArtists(range) {
-    const response = await fetch(`/top-artists?time_range=${range}`, {
+    const response = await fetch(`/api/top-artists?time_range=${range}`, {
         credentials: "include"
     });
     const data = await response.json();
 
     if (data.error) {
-        document.getElementById("home").style.display = "flex";
-        document.getElementById("top").style.display = "none";
+        
         if(error == "NO_ACTIVE_SESSION"){
-            showToast("Por favor, vuelva a iniciar sesión");
+            window.location.href = "/login?r=session_expired";
             
         }
-        return;
+        window.location.href = "/login?r=error";
     }
     const container = document.getElementById("artists");
     container.innerHTML = "";
@@ -51,9 +46,6 @@ async function loadArtists(range) {
 
     });
 
-    document.getElementById("home").style.display = "none";
-    document.getElementById("top").style.display = "flex";
-    document.title = "Tu top 10 - Toptify";
 
 
 }
