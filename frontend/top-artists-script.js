@@ -24,7 +24,7 @@ async function loadArtists(range) {
         
         if(data.error == "NO_ACTIVE_SESSION"){
             window.location.href = "/login?r=session_expired";
-            
+            return;
         }
         window.location.href = "/login?r=error";
         return;
