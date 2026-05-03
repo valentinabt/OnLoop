@@ -11,10 +11,10 @@ body {
 }
 h1 { color: #1ED160; }
 #titulo-login {
-    font-size: 70px;
+    font-size: clamp(32px, 8vw, 70px);
 }
 #titulo-top {
-    font-size: 40px;
+    font-size: clamp(24px, 5vw, 40px);
 }
 .centered {
     display: flex;
@@ -47,6 +47,7 @@ h1 { color: #1ED160; }
     display: flex;           
     justify-content: center;  
     gap: 30px;
+    flex-wrap: wrap;
     margin-top: 20px;
     
 }
@@ -74,7 +75,7 @@ h1 { color: #1ED160; }
 }
 #artists {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(autofill, minmax(140px, 1fr));
     gap: 20px;
     margin-top: 60px;
 }
@@ -96,6 +97,8 @@ h1 { color: #1ED160; }
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding-top: 15vh;
 }
 
 .toast {
