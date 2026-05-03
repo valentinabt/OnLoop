@@ -109,3 +109,10 @@ h1 { color: #1ED160; }
     margin-top: 50px;
    
 }
+.centered-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
