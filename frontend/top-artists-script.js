@@ -23,10 +23,10 @@ async function loadArtists(range) {
     if (data.error) {
         
         if(data.error == "NO_ACTIVE_SESSION"){
-            window.location.href = "/login?r=session_expired";
+            window.location.href = "/?r=session_expired";
             return;
         }
-        window.location.href = "/login?r=error";
+        window.location.href = "/?r=error";
         return;
     }
     const container = document.getElementById("artists");
