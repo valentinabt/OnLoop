@@ -118,3 +118,8 @@ h1 { color: #1ED160; }
     align-items: center;
     min-height: 100vh;
 }
+#description {
+    color: #b3b3b3;
+    font-size: 18px;
+    margin-top: 10px;
+}
