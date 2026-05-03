@@ -19,8 +19,9 @@ h1 { color: #1ED160; }
 .centered {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-top: 30vh;
 }
 .btn-spotify {
     background-color: #1ed760;
