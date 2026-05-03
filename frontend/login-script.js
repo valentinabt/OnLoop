@@ -10,7 +10,7 @@ function showToast(message){
     
     setTimeout(() => {
         toast.remove();
-    }, 10);
+    }, 2500);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
