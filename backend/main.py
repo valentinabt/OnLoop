@@ -5,7 +5,7 @@ from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
 from backend.services.spotify import get_token, get_artists, create_session, get_token_from_session, delete_session
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import uuid
+import secrets
 
 
 app = FastAPI()
@@ -28,7 +28,7 @@ app.add_middleware(
 
 def login():
     scope = "user-top-read%20user-read-private"
-    state = str(uuid.uuid4())  
+    state = secrets.token_urlsafe(32)  
     redirect = RedirectResponse(
         "https://accounts.spotify.com/authorize"
         f"?client_id={CLIENT_ID}"

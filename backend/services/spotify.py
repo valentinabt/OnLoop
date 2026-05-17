@@ -1,9 +1,7 @@
 import requests
-import redis
-import uuid
-from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REDIS_HOST, REDIS_PORT, REDIS_PASSWORD
+from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 
-r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0, password= REDIS_PASSWORD)
+
 
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 
@@ -46,17 +44,4 @@ def get_artists(access_token: str, time_range: str):
     
     return artists
 
-def create_session(access_token: str):
-    session_id = str(uuid.uuid4())  
-    r.setex(session_id, 3600, access_token) 
-    return session_id
-
-def get_token_from_session(session_id: str):
-    token = r.get(session_id)
-    if not token:
-        return None
-    return token.decode("utf-8")
-
-def delete_session(session_id: str):
-    r.delete(session_id)
     
