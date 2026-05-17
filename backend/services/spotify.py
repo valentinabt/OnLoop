@@ -1,8 +1,6 @@
 import requests
 from backend.config import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 
-
-
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 
 SPOTIFY_TOP_URL = "https://api.spotify.com/v1/me/top/artists"
