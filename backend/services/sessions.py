@@ -5,7 +5,7 @@ from backend.config import ENCRYPTION_KEY
 from cryptography.fernet import Fernet
 
 f = Fernet(ENCRYPTION_KEY.encode())
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
 table = dynamodb.Table('toptify-sessions')
 
 def create_session(access_token: str):
@@ -29,7 +29,7 @@ def delete_session(session_id: str):
     table.delete_item(Key={'session_id': session_id})
 
 def generate_session_id():
-    return secrets.token_urlsafe(8)
+    return secrets.token_urlsafe(32)
 
 def encrypt_token(token: str) -> str:
     return f.encrypt(token.encode()).decode()
