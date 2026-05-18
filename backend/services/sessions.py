@@ -36,3 +36,5 @@ def encrypt_token(token: str) -> str:
 
 def decrypt_token(token: str) -> str:
     return f.decrypt(token.encode()).decode()
+
+    

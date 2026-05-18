@@ -20,7 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (reason === "session_expired") {
         showToast("Tu sesión expiró, volvé a iniciar sesión");
         window.history.replaceState({}, "", "/");
-    } else if (reason === "error") {
+    } else if (reason === "fetch_error") {
+        showToast("No se pudieron cargar tus artistas, intentá nuevamente");
+        window.history.replaceState({}, "", "/");
+    }
+    else if (reason === "error") {
         showToast("Algo salió mal, intentá nuevamente");
         window.history.replaceState({}, "", "/");
     }

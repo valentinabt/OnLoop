@@ -26,6 +26,11 @@ async function loadArtists(range) {
             window.location.href = "/?r=session_expired";
             return;
         }
+        if(data.error == "FAILED_TO_FETCH_ARTISTS"){
+            window.location.href = "/?r=fetch_error";
+            return;
+        }
+
         window.location.href = "/?r=error";
         return;
     }
