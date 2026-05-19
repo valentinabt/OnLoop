@@ -133,7 +133,7 @@ h1 { color: #1ED160; }
     margin-top: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     #artists {
         display: flex;
         flex-direction: column;
