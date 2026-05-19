@@ -140,13 +140,14 @@ h1 { color: #1ED160; }
         margin-top: 20px;
         padding: 0 16px;
         box-sizing: border-box;
+        gap: 0;
     }
     .artist-card {
         display: flex !important;
         flex-direction: row;
         align-items: center;
         gap: 12px;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #222;
         background: transparent;
         border-radius: 0;
