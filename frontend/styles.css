@@ -85,11 +85,12 @@ h1 { color: #1ED160; }
     background-color: #121212;
     border-radius: 10px;
     padding: 15px;
-    width: 160px;
 }
 .artist-card img {
-    width: 150px;
-    height: 150px;
+    width: 100%; 
+    max-width: 150px;
+    height: auto; 
+    aspect-ratio: 1 / 1; 
     border-radius: 50%;
     object-fit: cover;
 }
@@ -122,4 +123,37 @@ h1 { color: #1ED160; }
     color: #b3b3b3;
     font-size: 22px;
     margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+
+    #artists {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+        padding: 0 10px;
+    }
+
+    #logout-btn {
+        position: static;
+        margin-top: 30px;
+        padding: 12px 40px;
+    }
+
+    
+    .btn-spotify {
+        padding: 14px 40px;
+        width: 80%;
+        max-width: 320px;
+    }
+
+    
+    .range-bar {
+        gap: 10px;
+    }
+
+    .range-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
 }
