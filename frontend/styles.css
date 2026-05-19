@@ -37,7 +37,7 @@ h1 { color: #1ED160; }
     margin-top: 40px;
 }
 #logout-btn {
-    position: static;
+    position: absolute;
     top: 20px;
     right: 20px;
     padding: 10px 30px;
@@ -128,19 +128,24 @@ h1 { color: #1ED160; }
 }
 
 @media (max-width: 480px) {
+    #top {
+        justify-content: flex-start;
+        min-height: unset;
+        padding-top: 20px;
+    }
     #artists {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);;
+        display: flex !important;
+        flex-direction: column;
         width: 100%;
-        max-width: 480px;
         margin-top: 20px;
         padding: 0 16px;
         box-sizing: border-box;
     }
     .artist-card {
-        display: flex;
+        display: flex !important;
+        flex-direction: row;
         align-items: center;
-        gap: 16px;
+        gap: 12px;
         padding: 10px 0;
         border-bottom: 1px solid #222;
         background: transparent;
@@ -148,9 +153,9 @@ h1 { color: #1ED160; }
         text-align: left;
     }
     .artist-card img {
-        width: 44px;
-        height: 44px;
-        max-width: 44px;
+        width: 44px !important;
+        height: 44px !important;
+        max-width: 44px !important;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         flex-shrink: 0;
