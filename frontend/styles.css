@@ -133,3 +133,49 @@ h1 { color: #1ED160; }
     margin-top: 8px;
 }
 
+@media (max-width: 768px) {
+    #artists {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 480px;
+        margin-top: 20px;
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+    .artist-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid #222;
+        background: transparent;
+        border-radius: 0;
+        text-align: left;
+    }
+    .artist-card img {
+        width: 44px;
+        height: 44px;
+        max-width: 44px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .artist-card h3 {
+        font-size: 14px;
+        margin: 0;
+        text-align: left;
+    }
+    #logout-btn {
+        position: static !important;
+        margin-top: 30px;
+        padding: 10px 30px;
+    }
+    .range-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    .range-bar {
+        gap: 10px;
+    }
+}
