@@ -126,37 +126,39 @@ h1 { color: #1ED160; }
 }
 
 @media (max-width: 768px) {
-    #artists {
+     #artists {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-top: 30px;
+        gap: 10px;
+        margin-top: 15px;
         padding: 0;
         width: 100%;
         box-sizing: border-box;
     }
+      #top {
+        padding: 16px;
+        min-height: 100vh;
+        justify-content: center;
+    }
 
-    #top {
-        width: 100%;
-        padding: 0 16px;
-        box-sizing: border-box;
+    #titulo-top {
+        font-size: clamp(18px, 5vw, 24px);
+    }
+
+
+    .artist-card {
+        padding: 8px;
+    }
+
+    .artist-card img {
+        max-width: 90px;
+    }
+
+    .artist-card h3 {
+        font-size: 11px;
+        margin: 6px 0 3px;
     }
 
     #logout-btn {
-        position: static !important;
-        margin-top: 30px;
-        padding: 12px 40px;
-    }
-
-    .btn-spotify {
-        padding: 14px 40px;
-    }
-
-    .range-bar {
-        gap: 10px;
-    }
-
-    .range-btn {
-        padding: 8px 14px;
-        font-size: 13px;
+        margin-top: 15px;
     }
 }
