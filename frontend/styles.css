@@ -74,28 +74,36 @@ h1 { color: #1ED160; }
     width: 100%;
 }
 #artists {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    margin-top: 60px;
-    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 480px;
+    margin-top: 30px;
+    padding: 0 16px;
     box-sizing: border-box;
 }
 .artist-card {
-    background-color: #121212;
-    border-radius: 10px;
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #121212;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
 }
 .artist-card img {
-    width: 100%; 
-    max-width: 150px;
-    height: auto; 
-    aspect-ratio: 1 / 1; 
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     object-fit: cover;
+    flex-shrink: 0;
 }
-.artist-card h3 { font-size: 14px; margin: 10px 0 5px; }
-
+.artist-card h3 {
+    font-size: 14px;
+    margin: 0;
+    color: white;
+}
 #home {
     display: flex;
     flex-direction: column;
@@ -125,40 +133,3 @@ h1 { color: #1ED160; }
     margin-top: 8px;
 }
 
-@media (max-width: 768px) {
-     #artists {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 15px;
-        padding: 0;
-        width: 100%;
-        box-sizing: border-box;
-    }
-      #top {
-        padding: 16px;
-        min-height: 100vh;
-        justify-content: center;
-    }
-
-    #titulo-top {
-        font-size: clamp(18px, 5vw, 24px);
-    }
-
-
-    .artist-card {
-        padding: 8px;
-    }
-
-    .artist-card img {
-        max-width: 90px;
-    }
-
-    .artist-card h3 {
-        font-size: 11px;
-        margin: 6px 0 3px;
-    }
-
-    #logout-btn {
-        margin-top: 15px;
-    }
-}
