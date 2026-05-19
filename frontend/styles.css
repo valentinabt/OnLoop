@@ -83,26 +83,21 @@ h1 { color: #1ED160; }
     box-sizing: border-box;
 }
 .artist-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 0;
-    border-bottom: 1px solid #121212;
-    background: transparent;
-    border-radius: 0;
-    text-align: left;
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 15px;
 }
 .artist-card img {
-    width: 44px;
-    height: 44px;
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0;
 }
 .artist-card h3 {
     font-size: 14px;
-    margin: 0;
-    color: white;
+    margin: 10px 0 5px;
 }
 #home {
     display: flex;
@@ -135,8 +130,8 @@ h1 { color: #1ED160; }
 
 @media (max-width: 480px) {
     #artists {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);;
         width: 100%;
         max-width: 480px;
         margin-top: 20px;
