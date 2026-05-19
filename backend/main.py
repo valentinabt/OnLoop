@@ -55,20 +55,22 @@ def login():
 def callback(code: str = None, error: str = None,state: str = None, oauth_state: str = Cookie(default=None)):
     
     if error:
-        return RedirectResponse(f"{FRONTEND_URL}")
+        return RedirectResponse(f"{FRONTEND_URL}/?r=error")
    
     elif not code:
-        return RedirectResponse(f"{FRONTEND_URL}")
+            return RedirectResponse(f"{FRONTEND_URL}/?r=error")
     
     elif not state or state != oauth_state:
-        return RedirectResponse(f"{FRONTEND_URL}")
-    
+        return RedirectResponse(f"{FRONTEND_URL}/?r=error")
     
     access_token = get_token(code)
     if access_token is None:
-        return RedirectResponse(f"{FRONTEND_URL}")
+        return RedirectResponse(f"{FRONTEND_URL}/?r=error")
     
     session_id = create_session(access_token)
+    if session_id is None:
+        return RedirectResponse(f"{FRONTEND_URL}")
+    
     redirect = RedirectResponse(f"{FRONTEND_URL}/top-artists", status_code=302)
     redirect.set_cookie(
         key="session_id",
@@ -101,7 +103,11 @@ def top_artists_page():
 def logout(session_id: str = Cookie(default=None)):
     if not session_id:
         return RedirectResponse(f"{FRONTEND_URL}")
-    delete_session(session_id)
+    try:
+        delete_session(session_id)
+    except Exception:
+        return RedirectResponse(f"{FRONTEND_URL}/?r=error")
+    
     redirect = RedirectResponse(f"{FRONTEND_URL}", status_code=302)
     redirect.delete_cookie(key="session_id")
     return redirect
