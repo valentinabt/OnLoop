@@ -69,7 +69,7 @@ def callback(code: str = None, error: str = None,state: str = None, oauth_state:
     
     session_id = create_session(access_token)
     if session_id is None:
-        return RedirectResponse(f"{FRONTEND_URL}")
+        return RedirectResponse(f"{FRONTEND_URL}/r=error")
     
     redirect = RedirectResponse(f"{FRONTEND_URL}/top-artists", status_code=302)
     redirect.set_cookie(
@@ -102,7 +102,7 @@ def top_artists_page():
 @app.get("/logout")
 def logout(session_id: str = Cookie(default=None)):
     if not session_id:
-        return RedirectResponse(f"{FRONTEND_URL}")
+        return RedirectResponse(f"{FRONTEND_URL}/?r=error")
     try:
         delete_session(session_id)
     except Exception:
