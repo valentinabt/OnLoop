@@ -37,7 +37,7 @@ h1 { color: #1ED160; }
     margin-top: 40px;
 }
 #logout-btn {
-    position: absolute;
+    position: static;
     top: 20px;
     right: 20px;
     padding: 10px 30px;
