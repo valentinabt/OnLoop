@@ -2,13 +2,13 @@ import boto3
 import secrets
 import time
 import logging
-from backend.config import ENCRYPTION_KEY
+from backend.config import ENCRYPTION_KEY, DYNAMODB_TABLE_NAME
 from cryptography.fernet import Fernet
 
 logger = logging.getLogger(__name__)
 f = Fernet(ENCRYPTION_KEY.encode())
 dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
-table = dynamodb.Table('toptify-sessions')
+table = dynamodb.Table(DYNAMODB_TABLE_NAME)
 
 def create_session(access_token: str):
     session_id = generate_session_id()
