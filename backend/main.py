@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
 from backend.services.spotify import get_artists, get_token, get_refresh_token, refresh_access_token
-from backend.services.sessions import create_session, get_access_token_from_session, delete_session, update_session
+from backend.services.sessions import create_session, get_refresh_token_from_session, get_access_token_from_session, delete_session, update_session
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -118,7 +118,7 @@ def refresh(session_id: str = Cookie(default=None)):
     if not session_id:
         return {"error": "NO_SESSION"}
     
-    refresh_token = get_refresh_token(session_id)
+    refresh_token = get_refresh_token_from_session(session_id)
     if not refresh_token:
         return {"error": "NO_SESSION"}
     
