@@ -12,11 +12,8 @@ f = Fernet(ENCRYPTION_KEY.encode())
 
 def create_session(access_token: str, refresh_token: str):
     session_id = generate_session_id()
-    expiration = int(time.time()) + 3600
-    encrypted_access_token = encrypt_token(access_token)
-    encrypted_refresh_token = encrypt_token(refresh_token)
     try:
-        write_session(session_id, encrypted_access_token, encrypted_refresh_token, expiration)
+        save_session(session_id, access_token, refresh_token)
         return session_id
     except Exception:
         logger.exception("Failed to create session")
@@ -32,14 +29,12 @@ def decrypt_token(token: str) -> str:
     return f.decrypt(token.encode()).decode()
 
 def update_session(session_id: str, access_token: str, refresh_token: str):
-    expiration = int(time.time()) + 3600
-    encrypted_access_token = encrypt_token(access_token)
-    encrypted_refresh_token = encrypt_token(refresh_token)
+    
     try:
-        write_session(session_id,encrypted_access_token, encrypted_refresh_token, expiration)
+        save_session(session_id, access_token, refresh_token)
         return session_id
     except Exception:
-        logger.exception("Failed to create session")
+        logger.exception("Failed to update session")
         return None
     
 def delete_session(session_id: str):
