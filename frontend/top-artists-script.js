@@ -22,8 +22,25 @@ async function loadArtists(range) {
 
     if (data.error) {
         
-        if(data.error == "NO_ACTIVE_SESSION"){
-            window.location.href = "/?r=session_expired";
+        if(data.error == "NO_SESSION"){
+            window.location.href = "/?r=no_session";
+            return;
+        }
+        if(data.error == "SESSION_EXPIRED"){
+            const refreshed = await tryRefresh();
+            if (refreshed.ok) {
+                loadArtists(range);
+                return;
+            }
+            if (refreshed.error == "FAILED_TO_REFRESH") {
+                window.location.href = "/?r=session_expired";
+                return;
+            }
+            if (refreshed.error == "NO_SESSION") {
+                window.location.href = "/?r=no_session";
+                return;
+            }
+            window.location.href = "/?r=error";
             return;
         }
         if(data.error == "FAILED_TO_FETCH_ARTISTS"){
@@ -51,10 +68,20 @@ async function loadArtists(range) {
 
 
     });
-
+    
 
 
 }
 
+async function tryRefresh() {
+    try {
+        const response = await fetch("/refresh", { credentials: "include" });
+        const data = await response.json();
+        if (data.ok) return { ok: true };
+        return { ok: false, error: data.error };
+    } catch {
+        return { ok: false, error: "NETWORK_ERROR" };
+    }
+}
 
 loadArtists(current_range);

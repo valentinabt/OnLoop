@@ -18,16 +18,16 @@ def get_token(code: str):
         )
         response.raise_for_status()
     except requests.RequestException:
-        return None
+        return None, None
     
     try:
         tokens = response.json()
     except ValueError:
-        return None
+        return None, None
 
-    if "access_token" not in tokens:
-        return None
-    return tokens["access_token"]
+    if "access_token" not in tokens or "refresh_token" not in tokens:
+        return None, None
+    return tokens["access_token"], tokens["refresh_token"]   
     
 
 
@@ -63,4 +63,28 @@ def get_artists(access_token: str, time_range: str):
     
     return artists
    
+    
+def refresh_access_token(refresh_token: str):
+    try:
+        response = requests.post(
+            SPOTIFY_TOKEN_URL,
+            data={
+                "grant_type": "refresh_token",
+                "refresh_token": refresh_token,
+                "redirect_uri": REDIRECT_URI,
+            },
+            auth=(CLIENT_ID, CLIENT_SECRET),
+        )
+        response.raise_for_status()
+    except requests.RequestException:
+        return None, None
+    
+    try:
+        tokens = response.json()
+    except ValueError:
+        return None, None
+
+    if "access_token" not in tokens or "refresh_token" not in tokens:
+        return None, None
+    return tokens["access_token"], tokens["refresh_token"]   
     

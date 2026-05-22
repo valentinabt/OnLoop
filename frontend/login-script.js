@@ -10,18 +10,21 @@ function showToast(message){
     
     setTimeout(() => {
         toast.remove();
-    }, 2500);
+    }, 3000);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const reason = params.get("r");
     
-    if (reason === "session_expired") {
-        showToast("Tu sesión expiró, volvé a iniciar sesión");
+    if (reason === "no_session") {
+        showToast("Por favor, inicie sesión");
         window.history.replaceState({}, "", "/");
     } else if (reason === "fetch_error") {
         showToast("No se pudieron cargar tus artistas, intentá nuevamente");
+        window.history.replaceState({}, "", "/");
+    } else if (reason === "session_expired") {
+        showToast("Tu sesión ha expirado, por favor inicie sesión nuevamente");
         window.history.replaceState({}, "", "/");
     }
     else if (reason === "error") {
