@@ -1,13 +1,10 @@
-
 import secrets
 import time
 import logging
-from backend.config import ENCRYPTION_KEY
-from cryptography.fernet import Fernet
-from db import delete_session_items, write_session, get_item_from_table , get_access_token_from_table, get_refresh_token_from_table
-
+from backend.services.db import delete_session_items, write_session, get_access_token_from_table, get_refresh_token_from_table
+from backend.utils import encrypt_token
 logger = logging.getLogger(__name__)
-f = Fernet(ENCRYPTION_KEY.encode())
+
 
 
 def create_session(access_token: str, refresh_token: str):
@@ -22,11 +19,6 @@ def create_session(access_token: str, refresh_token: str):
 def generate_session_id():
     return secrets.token_urlsafe(32)
 
-def encrypt_token(token: str) -> str:
-    return f.encrypt(token.encode()).decode()
-
-def decrypt_token(token: str) -> str:
-    return f.decrypt(token.encode()).decode()
 
 def update_session(session_id: str, access_token: str, refresh_token: str):
     

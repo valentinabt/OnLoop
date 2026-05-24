@@ -9,3 +9,6 @@ h11==0.16.0
 python-multipart
 boto3
 cryptography
+pytest
+pytest-asyncio 
+httpx  

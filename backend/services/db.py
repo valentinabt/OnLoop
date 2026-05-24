@@ -1,7 +1,7 @@
 import boto3
 import logging
 from backend.config import DYNAMODB_TABLE_NAME, DYNAMODB_REFRESH_TABLE_NAME
-from sessions import decrypt_token
+from backend.utils import decrypt_token
 
 logger = logging.getLogger(__name__)
 dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
@@ -10,7 +10,7 @@ refresh_table = dynamodb.Table(DYNAMODB_REFRESH_TABLE_NAME)
 
 
 
-def delete_session(session_id: str):
+def delete_session_items(session_id: str):
 
     dynamodb.meta.client.transact_write(Items=[
          {

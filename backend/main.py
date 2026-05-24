@@ -2,7 +2,7 @@ from fastapi import FastAPI, Cookie, Query
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
-from backend.services.spotify import get_artists, get_token, get_refresh_token, refresh_access_token
+from backend.services.spotify import get_artists, get_token, refresh_access_token
 from backend.services.sessions import create_session, get_refresh_token_from_session, get_access_token_from_session, delete_session, update_session
 
 from fastapi.staticfiles import StaticFiles
