@@ -5,3 +5,5 @@ __pycache__/
 .DS_Store
 .vale.pem
 __init__.py
+.env.test
+.pytest_cache/
