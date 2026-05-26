@@ -1,29 +1,13 @@
-from fastapi import FastAPI, Cookie, Query
+from fastapi import FastAPI, Cookie
 from fastapi.responses import RedirectResponse
-from fastapi.middleware.cors import CORSMiddleware
 from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
-from backend.services.spotify import get_artists, get_token, refresh_access_token
-from backend.services.sessions import create_session, get_refresh_token_from_session, get_access_token_from_session, delete_session, update_session
-
-from fastapi.staticfiles import StaticFiles
+from backend.services.spotify import get_token, refresh_access_token
+from backend.services.sessions import create_session, get_refresh_token_from_session, delete_session, update_session
 import secrets
 
+router = FastAPI()
 
-app = FastAPI()
-
-
-app.mount("/static", StaticFiles(directory="/app/frontend"), name="static")
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[FRONTEND_URL],
-    allow_methods=["GET","POST"],
-    allow_headers=["*"],
-    allow_credentials=True,
-)
-
-@app.get("/login")
+@router.get("/login")
 def login():
     scope = "user-top-read%20user-read-private"
     state = secrets.token_urlsafe(32)  
@@ -47,7 +31,7 @@ def login():
     )
     return redirect
 
-@app.get("/callback")
+@router.get("/callback")
 def callback(code: str = None, error: str = None,state: str = None, oauth_state: str = Cookie(default=None)):
     
     if error:
@@ -79,23 +63,9 @@ def callback(code: str = None, error: str = None,state: str = None, oauth_state:
     )
     return redirect
 
-    
-@app.get("/api/top-artists")
-def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(default="short_term")): 
-    if not session_id:
-        return {"error": "NO_SESSION"}  
-    access_token = get_access_token_from_session(session_id)
-    if not access_token:
-        return {"error": "NO_SESSION"}
-    artists = get_artists(access_token, time_range)
-    if artists == "TOKEN_EXPIRED":
-        return {"error": "SESSION_EXPIRED"}
-    if artists is None:
-        return {"error": "FAILED_TO_FETCH_ARTISTS"}
-    return artists
+ 
 
-
-@app.get("/logout")
+@router.get("/logout")
 def logout(session_id: str = Cookie(default=None)):
     if not session_id:
         return RedirectResponse(f"{FRONTEND_URL}/?r=error")
@@ -108,7 +78,7 @@ def logout(session_id: str = Cookie(default=None)):
     redirect.delete_cookie(key="session_id")
     return redirect
 
-@app.post("/refresh")
+@router.post("/refresh")
 def refresh(session_id: str = Cookie(default=None)):
     if not session_id:
         return {"error": "NO_SESSION"}
