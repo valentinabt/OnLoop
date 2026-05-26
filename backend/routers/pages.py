@@ -5,8 +5,8 @@ router = APIRouter()
 
 @router.get("/")
 def root():
-   return FileResponse("/app/frontend/login.html")
+    return FileResponse("/app/frontend/pages/login/login.html")
 
 @router.get("/top-artists")
 def top_artists_page():
-    return FileResponse("/app/frontend/top-artists.html")
+    return FileResponse("/app/frontend/pages/top-artists/top-artists.html")
