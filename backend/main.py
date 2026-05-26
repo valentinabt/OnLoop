@@ -27,7 +27,6 @@ app.add_middleware(
 )
 
 @app.get("/login")
-
 def login():
     scope = "user-top-read%20user-read-private"
     state = secrets.token_urlsafe(32)  
