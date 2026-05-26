@@ -16,8 +16,12 @@ def get_refresh_table():
 
 def delete_session_items(session_id: str):
     try:
-        get_table().delete_item(Key={'session_id': session_id})
         get_refresh_table().delete_item(Key={'session_id': session_id})
+    except Exception:
+        logger.exception("DynamoDB delete_session from refresh failed")
+        raise 
+    try:
+        get_table().delete_item(Key={'session_id': session_id})
     except Exception:
         logger.exception("DynamoDB delete_session failed")
         raise 

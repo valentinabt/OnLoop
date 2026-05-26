@@ -124,6 +124,7 @@ def refresh(session_id: str = Cookie(default=None)):
     
     access_token, refresh_token = refresh_access_token(refresh_token)
     if not access_token or not refresh_token:
+        delete_session(session_id)
         return {"error": "FAILED_TO_REFRESH"}
     
     success = update_session(session_id, access_token, refresh_token)

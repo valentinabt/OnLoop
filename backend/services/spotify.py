@@ -84,7 +84,9 @@ def refresh_access_token(refresh_token: str):
     except ValueError:
         return None, None
 
-    if "access_token" not in tokens or "refresh_token" not in tokens:
+    if "access_token" not in tokens:
         return None, None
+    if "refresh_token" not in tokens:
+        tokens["refresh_token"] = refresh_token
     return tokens["access_token"], tokens["refresh_token"]   
     
