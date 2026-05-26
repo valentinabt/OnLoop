@@ -14,9 +14,7 @@ app = FastAPI()
 
 
 app.mount("/static", StaticFiles(directory="/app/frontend"), name="static")
-@app.get("/")
-def root():
-   return FileResponse("/app/frontend/login.html")
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -97,9 +95,6 @@ def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(
         return {"error": "FAILED_TO_FETCH_ARTISTS"}
     return artists
 
-@app.get("/top-artists")
-def top_artists_page():
-    return FileResponse("/app/frontend/top-artists.html")
 
 @app.get("/logout")
 def logout(session_id: str = Cookie(default=None)):
