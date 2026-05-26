@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Cookie, Query
+from fastapi import APIRouter,Cookie, Query
 from backend.services.sessions import get_access_token_from_session
 from backend.services.spotify import get_artists
 
-router = FastAPI()
+router = APIRouter()
 
 @router.get("/api/top-artists")
 def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(default="short_term")): 

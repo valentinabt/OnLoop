@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import FRONTEND_URL
 from fastapi.staticfiles import StaticFiles
+import backend.routers.auth as auth
+import backend.routers.api as api
+import backend.routers.pages as pages
 
 app = FastAPI()
 
@@ -16,6 +19,6 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-app.include_router(routers.auth.router)
+app.include_router(auth.router)
 app.include_router(api.router)
 app.include_router(pages.router)

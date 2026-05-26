@@ -1,11 +1,11 @@
-from fastapi import FastAPI, Cookie
+from fastapi import APIRouter, Cookie
 from fastapi.responses import RedirectResponse
 from backend.config import CLIENT_ID, REDIRECT_URI, FRONTEND_URL
 from backend.services.spotify import get_token, refresh_access_token
 from backend.services.sessions import create_session, get_refresh_token_from_session, delete_session, update_session
 import secrets
 
-router = FastAPI()
+router = APIRouter()
 
 @router.get("/login")
 def login():
