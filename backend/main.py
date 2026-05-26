@@ -90,8 +90,10 @@ def top_artists(session_id: str = Cookie(default=None), time_range: str = Query(
         return {"error": "NO_SESSION"}  
     access_token = get_access_token_from_session(session_id)
     if not access_token:
-        return {"error": "SESSION_EXPIRED"}
+        return {"error": "NO_SESSION"}
     artists = get_artists(access_token, time_range)
+    if artists == "TOKEN_EXPIRED":
+        return {"error": "SESSION_EXPIRED"}
     if artists is None:
         return {"error": "FAILED_TO_FETCH_ARTISTS"}
     return artists
@@ -113,7 +115,7 @@ def logout(session_id: str = Cookie(default=None)):
     redirect.delete_cookie(key="session_id")
     return redirect
 
-@app.get("/refresh")
+@app.post("/refresh")
 def refresh(session_id: str = Cookie(default=None)):
     if not session_id:
         return {"error": "NO_SESSION"}

@@ -75,7 +75,7 @@ async function loadArtists(range) {
 
 async function tryRefresh() {
     try {
-        const response = await fetch("/refresh", { credentials: "include" });
+        const response = await fetch("/refresh", { method: "POST", credentials: "include" });
         const data = await response.json();
         if (data.ok) return { ok: true };
         return { ok: false, error: data.error };

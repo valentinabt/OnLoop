@@ -14,7 +14,7 @@ def test_top_artists_no_session():
 def test_top_artists_without_access_token(mock_get_access_token_from_session):
     response = client.get("/api/top-artists", cookies={"session_id": "abc"})
     assert response.status_code == 200
-    assert response.json() == {"error": "SESSION_EXPIRED"}
+    assert response.json() == {"error": "NO_SESSION"}
 
 @patch("backend.main.get_artists", return_value=None)
 @patch("backend.main.get_access_token_from_session", return_value="access_token")

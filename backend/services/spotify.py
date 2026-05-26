@@ -44,6 +44,8 @@ def get_artists(access_token: str, time_range: str):
                 "Authorization": f"Bearer {access_token}"
             }
         )
+        if response.status_code == 401:
+            return "TOKEN_EXPIRED"
         response.raise_for_status()
         
     except requests.RequestException:
