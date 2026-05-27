@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const reason = params.get("r");
     
-    if (reason && t.toast[reason]){
+    if (reason && t.toasts[reason]){
         showToast(t.toasts[reason]);
         window.history.replaceState({}, "","/");
     }
