@@ -11,12 +11,10 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
 def get_table():
     return dynamodb.Table(config.DYNAMODB_TABLE_NAME)
 
-def get_refresh_table():
-    return dynamodb.Table(config.DYNAMODB_REFRESH_TABLE_NAME)
 
 def delete_session_items(session_id: str):
     try:
-        get_refresh_table().delete_item(Key={'session_id': session_id})
+        get_table().delete_item(Key={'session_id': session_id})
     except Exception:
         logger.exception("DynamoDB delete_session from refresh failed")
         raise 
@@ -31,11 +29,8 @@ def write_session(session_id: str, encrypted_access_token: str, encrypted_refres
         get_table().put_item(Item={
             'session_id': session_id,
             'access_token': encrypted_access_token,
+            'refresh_token': encrypted_refresh_token,
             'ttl': expiration
-        })
-        get_refresh_table().put_item(Item={
-            'session_id': session_id,
-            'refresh_token': encrypted_refresh_token
         })
     except Exception:
         logger.exception("DynamoDB write_session failed")
@@ -57,5 +52,5 @@ def get_access_token_from_table(session_id: str):
 
 
 def get_refresh_token_from_table(session_id: str):
-     return get_item_from_table(get_refresh_table(), session_id, 'refresh_token')
+     return get_item_from_table(get_table(), session_id, 'refresh_token')
 

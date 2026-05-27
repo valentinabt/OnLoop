@@ -1,3 +1,30 @@
+const lang = navigator.language.startsWith("en") ? "en" : "es";
+
+const i18n = {
+    es: {
+        title: "Tus artistas más escuchados",
+        shortTerm: "1 mes",
+        mediumTerm: "6 meses",
+        longTerm: "1 año",
+        logout: "Cerrar sesión"
+    },
+    en: {
+        title: "Your most listened-to artists",
+        shortTerm: "1 month",
+        mediumTerm: "6 months",
+        longTerm: "1 year",
+        logout: "Log out"
+    }
+};
+
+const t = i18n[lang];
+
+document.getElementById("titulo-top").textContent = t.title;
+document.getElementById("btn-short").textContent = t.shortTerm;
+document.getElementById("btn-medium").textContent = t.mediumTerm;
+document.getElementById("btn-long").textContent = t.longTerm;
+document.getElementById("logout-btn").textContent = t.logout;
+
 function logout() {
     window.location.href = "/logout";
 }
@@ -75,7 +102,7 @@ async function loadArtists(range) {
 
 async function tryRefresh() {
     try {
-        const response = await fetch("/refresh", { credentials: "include" });
+        const response = await fetch("/refresh", { method: "POST", credentials: "include" });
         const data = await response.json();
         if (data.ok) return { ok: true };
         return { ok: false, error: data.error };
