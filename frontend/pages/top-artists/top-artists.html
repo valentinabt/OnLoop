@@ -10,14 +10,14 @@
 </head>
 <body class="centered-top">
     <section id="top">
-        <h1 id="titulo-top">Tus artistas más escuchados</h1>
+        <h1 id="titulo-top"></h1>
         <div class="range-bar">
-            <button class="range-btn active" onclick="update_range('short_term',this)">1 mes</button>
-            <button class="range-btn" onclick="update_range('medium_term',this)">6 meses</button>
-            <button class="range-btn" onclick="update_range('long_term',this)">1 año</button>
+            <button class="range-btn active" onclick="update_range('short_term',this)" id= "btn-short"></button>
+            <button class="range-btn" onclick="update_range('medium_term',this)"id= "btn-medium"></button>
+            <button class="range-btn" onclick="update_range('long_term',this)"id= "btn-long"></button>
         </div>
         <div id="artists"></div>
-        <button id="logout-btn" class="btn-spotify" onclick="logout()">Cerrar sesión</button>
+        <button id="logout-btn" class="btn-spotify" onclick="logout()"></button>
     </section>
 
     <script src="/static/pages/top-artists/top-artists-script.js"></script>
