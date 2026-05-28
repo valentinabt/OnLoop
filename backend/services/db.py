@@ -5,7 +5,7 @@ from backend.utils import decrypt_token
 
 
 logger = logging.getLogger(__name__)
-dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+dynamodb = boto3.resource('dynamodb', region_name=config.AWS_DEFAULT_REGION)
 
 
 def get_table():

@@ -44,7 +44,7 @@ def get_refresh_token_from_session(session_id: str):
 
 
 def save_session(session_id: str, access_token: str, refresh_token: str):
-    expiration = int(time.time()) + (14 * 24 * 3600)  #14 dias
+    expiration = int(time.time()) + (14 * 24 * 3600)  #14 days
     encrypted_access_token = encrypt_token(access_token)
     encrypted_refresh_token = encrypt_token(refresh_token)
     write_session(session_id, encrypted_access_token, encrypted_refresh_token, expiration)
