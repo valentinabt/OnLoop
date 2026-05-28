@@ -20,11 +20,6 @@
 
 [**Ver versión Mobile** ](https://github.com/user-attachments/assets/159e9036-3153-471e-ae5b-9907d18d6df7)
 
-
-[ Versión Desktop ](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) 
-
-[Versión Mobile ](https://github.com/user-attachments/assets/159e9036-3153-471e-ae5b-9907d18d6df7)
-
 ---
 
 ### Sobre el proyecto
