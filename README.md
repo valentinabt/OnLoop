@@ -2,7 +2,7 @@
 
 **Una aplicación web que muestra tus 10 artistas más escuchados en Spotify** 
 
- [Deploy](DEPLOY.md) · [English](README-EN.md)
+ [Guía de instalación](DEPLOY.md) · [English](README-EN.md)
 
 ### **Vista previa**
 

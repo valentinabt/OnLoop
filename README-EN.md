@@ -2,7 +2,7 @@
 
  **A web app that shows your top 10 most-listened-to Spotify artists**
 
- [Deploy](DEPLOY.md) · [Spanish](README.md)
+ [Setup guide](DEPLOY.md) · [Spanish](README.md)
 
 ### **Preview**
 
