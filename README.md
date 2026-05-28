@@ -1,24 +1,24 @@
 # OnLoop
 
-Una aplicación web que muestra tus 10 artistas más escuchados en Spotify · 
+**Una aplicación web que muestra tus 10 artistas más escuchados en Spotify** 
 
  [Deploy](DEPLOY.md) · [English](README-EN.md)
 
 ## Demo
 
-### [Link] https://onloop.com.ar/
+### [Link](https://onloop.com.ar/)
 
 > ⚠️ Debido a las restricciones actuales de la API de Spotify, la app está limitada a 5 usuarios de prueba. Si querés acceso, escribime para agregarte manualmente.
 
-### [Desktop ](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) 
+[ Versión Desktop ](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) 
 
-### [Mobile ] (https://github.com/user-attachments/assets/6b99440b-b861-4e8f-885e-7b162ca3b8e8)
+[Versión Mobile ](https://github.com/user-attachments/assets/159e9036-3153-471e-ae5b-9907d18d6df7)
 
 ---
 
 ### Sobre el proyecto
 
-El proyecto integra la API de Spotify para mostrar los artistas más escuchados de un usuario a lo largo del tiempo.
+El proyecto integra la **API de Spotify** para mostrar los artistas más escuchados de un usuario a lo largo del tiempo.
 
 OnLoop representó mi primer acercamiento al desarrollo web backend, donde aprendí e implementé:
 
