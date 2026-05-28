@@ -1,6 +1,6 @@
-# Guía de Deploy - OnLoop
+# Guía de Deploy OnLoop
 
-[English](#Deploy-guide-onloop)
+[English](#deploy-guide-onloop)
 
 ---
 
@@ -138,9 +138,9 @@ docker exec -it \
 ---
 ---
 
-#  Deploy Guide - OnLoop
+# Deploy Guide OnLoop
 
-[Español](#Guía-de-deploy-onloop)
+[Español](#guía-de-deploy-onloop)
 
 ---
 
