@@ -2,7 +2,7 @@
 
 Una aplicación web que muestra tus 10 artistas más escuchados en Spotify · 
 
-[Demo](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) · [Deploy](DEPLOY.md) · [English](README_EN.md)
+[Demo](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) · [Deploy](DEPLOY.md) · [English](README-EN.md)
 
 
 > ⚠️ Debido a las restricciones actuales de la API de Spotify, la app está limitada a 5 usuarios de prueba. Si querés acceso, escribime para agregarte manualmente.
