@@ -35,7 +35,7 @@ OnLoop representó mi primer acercamiento al desarrollo web backend, donde apren
 - Bases de datos NoSQL con AWS DynamoDB
 - Encriptación de tokens sensibles en reposo con Fernet
 
-### Tech Stack
+### Herramientas utilizadas
 
 | Capa | Tecnología |
 |------|------------|
