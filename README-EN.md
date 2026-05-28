@@ -1,11 +1,26 @@
 # OnLoop
 
- A web app that shows your top 10 most-listened-to Spotify artists
+ **A web app that shows your top 10 most-listened-to Spotify artists**
 
-[Demo](https://github.com/user-attachments/assets/5fba26f6-1e14-45ed-9658-38746b87a784) · [Deploy](DEPLOY.md) · [Spanish](README.md)
+ [Deploy](DEPLOY.md) · [Spanish](README.md)
+
+### **Preview**
 
 
-> ⚠️ **EN:** Due to Spotify's current API restrictions, the app is limited to 5 test users. If you'd like access, reach out so I can add you manually.
+![Login](assets/login-en.png)
+
+![Top Artists](assets/top-artists-en.png)
+
+> [!WARNING]
+> Due to Spotify's current API policies, the application runs in development mode, restricting access to a  limited group of test users. 
+> The project is fully deployed and functional at [onloop.com.ar](https://onloop.com.ar). If you would like to test it with your own account, feel free to request access via [LinkedIn](https://www.linkedin.com/in/valentina-sancho).
+
+
+
+[**View Desktop version** ](https://github.com/user-attachments/assets/5fba26f6-1e14-45ed-9658-38746b87a784)
+
+[**View Mobile version** ](https://github.com/user-attachments/assets/d9ca8cee-03e1-4cfe-8a21-9b5e0072e408)
+
 
 ---
 
@@ -219,11 +234,6 @@ When the frontend receives a redirect with `?r=`, it displays a toast with the c
 | `fetch_error` | "Could not load your artists, please try again" |
 | `error` | "Something went wrong, please try again" |
 
-----
-
-### Spotify API limitations
-
-Due to Spotify's current API policies, the application runs in development mode, restricting access to a limited group of test users. Because of the strict requirements to transition into extended quota/production mode, the project remains active as a fully functional proof of concept deployed at [onloop.com.ar](https://onloop.com.ar).
 
 ---
 

@@ -1,11 +1,25 @@
 # OnLoop
 
-Una aplicación web que muestra tus 10 artistas más escuchados en Spotify · 
+**Una aplicación web que muestra tus 10 artistas más escuchados en Spotify** 
 
-[Demo](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) · [Deploy](DEPLOY.md) · [English](README_EN.md)
+ [Deploy](DEPLOY.md) · [English](README-EN.md)
 
+### **Vista previa**
 
-> ⚠️ Debido a las restricciones actuales de la API de Spotify, la app está limitada a 5 usuarios de prueba. Si querés acceso, escribime para agregarte manualmente.
+![Login](assets/login-es.png)
+
+![Top Artistas](assets/top-artists-es.png)
+
+> [!WARNING]
+> Debido a las políticas actuales de Spotify, la aplicación se encuentra en modo de desarrollo, lo que 
+> limita el acceso a un grupo reducido de usuarios de prueba previamente registrados de forma manual.
+> El proyecto está completamente desplegado y funcional en [onloop.com.ar](https://onloop.com.ar). 
+> Para solicitar acceso, contactame por [LinkedIn](https://www.linkedin.com/in/valentina-sancho).
+
+[**Ver versión Desktop** ](https://github.com/user-attachments/assets/49ea0cf6-6421-469f-9f4d-d9db575ecf11) 
+
+[**Ver versión Mobile** ](https://github.com/user-attachments/assets/159e9036-3153-471e-ae5b-9907d18d6df7)
+
 
 ---
 
@@ -220,10 +234,7 @@ Cuando el frontend recibe una redirección con `?r=`, muestra un toast con el me
 | `fetch_error` | "No se pudieron cargar tus artistas, intentá nuevamente" |
 | `error` | "Algo salió mal, intentá nuevamente" |
 
+
 ---
-
-### Limitaciones de la API de Spotify
-
-Debido a las políticas actuales de Spotify, la aplicación se encuentra en modo de desarrollo, lo que limita el acceso a un grupo reducido de usuarios de prueba. Dadas las estrictas condiciones requeridas para pasar a producción, el proyecto se mantiene como una prueba de concepto completamente funcional y desplegada en [onloop.com.ar](https://onloop.com.ar).
 
 *Made by [valensancho](https://github.com/valensancho)*
